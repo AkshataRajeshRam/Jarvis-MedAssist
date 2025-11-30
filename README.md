@@ -1,78 +1,6 @@
 # Google Calendar Integration for ADK Voice Assistant
 
-Here is a detailed, easy-to-understand explanation of the "Jarvis" Voice Assistant project, broken down for both kids and adults to understand how the pieces fit together.
 
-🎙️ Project Overview: Building "Jarvis" the Calendar Agent
-Imagine having a helper like Iron Man’s Jarvis, but specifically designed to manage your schedule. This project builds a Voice Assistant that you can talk to in real-time. You don't need to type; you just speak to it, and it organizes your Google Calendar for you.
-
-⚡ What Can "Jarvis" Do?
-Just like a human personal assistant, this software has specific jobs it can perform:
-
-List Events: You ask, "What am I doing tomorrow?" and it checks your schedule.
-
-Create Events: You say, "Schedule a date night for Friday at 7 PM," and it writes it down.
-
-Edit Events: If plans change, you say, "Move that meeting to 2 PM," and it updates it.
-
-Delete Events: You say, "Cancel my dentist appointment," and it removes it.
-
-🏗️ The Structure: How It Works Under the Hood
-To make this work, we use a technology called ADK (Agent Development Kit). Think of ADK as a set of Lego blocks for building smart robots.
-
-Here is how the project files and structure are organized, explained simply:
-
-1. The Brain (agent.py)
-This file is the most important part. It defines who the agent is and how it thinks.
-
-The Model (The Intelligence): We use a model called Gemini 2.0 Flash Live. This is a special AI brain that is super fast and can understand audio (voice) and text at the same time.
-
-The Instructions ( The Rules): We give the agent a "System Prompt." This is a list of rules like: "You are a helpful assistant," "Be concise," and "If the user doesn't say a date, assume they mean today."
-
-The Tools (The Hands): The brain is smart, but it can't touch your calendar on its own. We give it "Tools"—special blocks of code that allow it to reach out and actually change your Google Calendar.
-
-Image of AI agent logic flow diagram
-Shutterstock
-2. The Hands (tools.py / Calendar Integration)
-This part handles the heavy lifting. It uses Google Calendar API (Application Programming Interface).
-
-Think of the API as a set of keys. You have to authenticate (prove who you are) so the agent is allowed to unlock your calendar.
-
-When the agent decides to "Create an Event," it uses these tools to send the specific data (Time, Date, Title) to Google's servers.
-
-3. The Nervous System (main.py & FastAPI)
-In the second phase of the project, we build a custom website so we can talk to the agent.
-
-FastAPI: This is a tool that creates a web server. It acts like a post office, sending messages back and forth between the website you see on your screen and the AI agent running on your computer.
-
-WebSockets: This is a "permanent telephone line" between your browser and the agent. It allows you to speak, and the agent to speak back instantly, without having to wait for the page to reload.
-
-Image of client server architecture diagram
-Shutterstock
-Explore
-🔄 The Workflow: A Step-by-Step Story
-Here is what happens in the code when you use the assistant:
-
-You Speak: You click "Enable Voice" on the website and say, "Add a soccer game for tomorrow at 5 PM."
-
-Transmission: Your voice is sent through the WebSocket (the telephone line) in main.py to the Agent.
-
-Assessment: The Agent (agent.py) listens. It realizes you want to Create an Event.
-
-Action: The Agent uses the Create Event Tool. It calculates what date "tomorrow" is and formats the time.
-
-Execution: The Tool talks to Google Calendar and saves the soccer game.
-
-Response: The Agent sees the event is saved and speaks back to you: "Okay, I've added the soccer game to your calendar."
-
-📂 Important Files Summary
-pyproject.toml: This is the shopping list. It tells the computer which ingredients (software libraries) it needs to download to make the app work.
-
-README.md: This is the instruction manual. It tells humans how to set up the project, get their API keys, and start the software.
-
-
-------------
-
-Here is a detailed, easy-to-understand explanation of the project suitable for a `README.md` file or project documentation. It is designed to be accessible to beginners (kids) while providing the technical depth required for developers (adults).
 
 -----
 
@@ -368,3 +296,6 @@ If you encounter issues installing the required packages:
 - The OAuth token is stored securely in your user directory
 - Never share your `credentials.json` file or the generated token
 - The application only requests the minimum permissions needed for calendar operations
+
+
+
