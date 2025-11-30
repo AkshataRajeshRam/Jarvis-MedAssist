@@ -1,3 +1,19 @@
+Metadata-Version: 2.4
+Name: voice-agent
+Version: 0.1.0
+Summary: ADK Voice Assistant with Google Calendar
+Requires-Python: >=3.12
+Description-Content-Type: text/markdown
+Requires-Dist: google-adk
+Requires-Dist: google-genai
+Requires-Dist: google-api-python-client
+Requires-Dist: google-auth-oauthlib
+Requires-Dist: fastapi
+Requires-Dist: uvicorn
+Requires-Dist: python-multipart
+Requires-Dist: websockets
+Requires-Dist: python-dotenv
+
 # Google Calendar Integration for ADK Voice Assistant
 
 Here is a detailed, easy-to-understand explanation of the "Jarvis" Voice Assistant project, broken down for both kids and adults to understand how the pieces fit together.
