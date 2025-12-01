@@ -252,7 +252,7 @@ After completing the setup, you can run the application using the following comm
 
 ```bash
 # Start the ADK Voice Assistant with hot-reloading enabled
-uvicorn main:app --reload
+uvicorn app.main:app --reload
 ```
 
 This will start the application server, and you can interact with your voice assistant through the provided interface.
@@ -296,6 +296,5 @@ If you encounter issues installing the required packages:
 - The OAuth token is stored securely in your user directory
 - Never share your `credentials.json` file or the generated token
 - The application only requests the minimum permissions needed for calendar operations
-
 
 
