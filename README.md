@@ -1,178 +1,144 @@
-#  ADK Voice Assistant
+#ADK Voice Assistant
+🚀 Jarvis: Your AI Voice Calendar & Wellness Assistant
 
+Powered by Google ADK + Gemini 2.0 Flash Experimental
+
+Jarvis is your personal AI voice assistant. You talk to it, and it not only manages your Google Calendar but also gives general wellness suggestions based on your symptoms — just like a friendly assistant who cares about your schedule and your well-being.
+
+Jarvis listens, thinks, and acts — all in real time.
+
+<img width="1313" height="804" alt="image" src="https://github.com/user-attachments/assets/8791cc03-72bd-4c07-b8ad-6e49a375c0fb" />
 
 
 -----
 
-# 🎙️ Jarvis: The ADK Voice Calendar Assistant
+🧠 How It Works (The Big Picture)
 
-Welcome to **Jarvis**, your personal AI voice assistant\! This project isn't just a chatbot; it is a fully functional "agent" that can listen to your voice, understand what you need, and actually reach out to change your Google Calendar in real-time.
+This project uses:
 
-Think of this project as building a robot secretary that lives inside your computer. You talk to it, and it manages your schedule for you.
+ADK (Agent Development Kit) → Handles the agent logic and WebSocket communication.
 
-[Image of AI voice assistant conceptual diagram]
+Gemini 2.0 Flash Experimental → Listens, understands your intent, and generates responses.
 
------
+Google Calendar API → Creates, updates, and deletes calendar events.
 
-## 🧩 How It Works (The Big Picture)
+Real-Time Audio → Jarvis hears you and responds instantly.
 
-This project uses the **ADK (Agent Development Kit)** and the **Gemini 2.0 Flash** model. It works in a loop like this:
+Flow
 
-1.  **Input:** You speak to the website (or type text).
-2.  **Transmission:** Your voice is sent instantly to the AI agent using a "WebSocket" (imagine a telephone line that stays open).
-3.  **Thinking (The Agent):** The AI (Gemini 2.0) listens to the audio. It decides if it needs to check your calendar, add an event, or just chat.
-4.  **Action (The Tools):** If you asked to schedule a meeting, the Agent uses its "hands" (Tools) to talk to Google Calendar.
-5.  **Response:** The Agent speaks back to you with the confirmation.
+1.You speak through the web interface.
 
-[Image of client server AI architecture diagram]
+2.Audio is streamed to the Agent using a WebSocket.
 
------
+3.The Agent transcribes your speech → Gemini understands the intent.
 
-## 🛠️ What Can Jarvis Do? (The Capabilities)
+4.Jarvis decides whether you want to:
 
-Jarvis has been given specific **Tools** (Python functions) that allow it to interact with the real world. It doesn't just guess; it actually executes code.
+5.Create a meeting
 
-  * **📅 List Events:** It can see what is on your schedule for today, tomorrow, or next week.
-  * **➕ Create Events:** You can say "Schedule date night tomorrow at 5 PM," and it will add it.
-  * **✏️ Edit Events:** Made a mistake? Tell Jarvis to move the meeting, and it will update the time.
-  * **🗑️ Delete Events:** If plans change, Jarvis can remove events from your calendar.
+6.Check your schedule
 
------
+7.Edit or delete an event, OR
 
-## 📂 Project Structure (The Files)
+8.Ask about symptoms such as headaches, stomach pain, fever, etc.
 
-Here is how the code is organized. Think of the folder like a human body:
+9.If it's a calendar task, Jarvis uses Google Calendar API to perform the action.
 
-### 1\. `app/agent.py` (The Brain) 🧠
-
-This file contains the **Instructions** and the **Model** definition.
-
-  * It tells the AI: "You are Jarvis. You are helpful. You manage calendars."
-  * It defines the model: **Gemini 2.0 Flash Experimental** (chosen because it is super fast and understands audio nativey).
-
-### 2\. `app/tools.py` (The Hands) ✋
-
-The brain needs hands to do work. This file contains the code that connects to Google.
-
-  * It handles the **Authentication** (logging into Google).
-  * It defines the functions: `list_events`, `create_events`, etc.
-  * It formats the data so the AI can understand it easily (e.g., converting computer time to human time).
-
-### 3\. `app/main.py` (The Nervous System) ⚡
-
-This is the connection layer using **FastAPI**.
-
-  * It runs the website server.
-  * It manages the **WebSockets** (the real-time connection between your browser and the Python code).
-  * It handles the audio streaming so the conversation feels instant.
+10.Jarvis speaks back with a natural voice output.
 
 -----
+🧩 What Jarvis Can Do (Features)
+🗓 1. Calendar Management
 
-## 🚀 How to Run This Project
+Jarvis understands natural language commands like:
 
-### Prerequisites
+“Schedule a meeting tomorrow at 5 PM.”
 
-  * **Python 3.10+**
-  * **Google Cloud Account** (To get Calendar API access).
-  * **Gemini API Key** (To power the brain).
+“Show me my meetings for next week.”
 
-### Step-by-Step Setup
+“Move my 3 PM meeting to 4 PM.”
 
-1.  **Download Credentials:**
-    You need to create a project in Google Cloud, enable the Calendar API, and download your `credentials.json` file. This is like giving Jarvis the key to your office.
+“Delete the event on Monday.”
 
-2.  **Install Dependencies:**
-    We use `uv` or `pip` to install the requirements found in `pyproject.toml`.
+🤒 2. Basic Wellness Suggestions
 
-    ```bash
-    pip install -r requirements.txt
-    ```
+When you say things like:
 
-3.  **Authenticate Locally:**
-    Run the setup script to log in to Google on your machine.
+“I have a headache.”
 
-    ```bash
-    python setup_calendar.py
-    ```
+“My stomach is hurting.”
 
-4.  **Run the App (Phase 1 - Testing):**
-    You can test quickly using the ADK web interface.
+“I feel dizzy.”
 
-    ```bash
-    adk web
-    ```
+Jarvis gives general, non-medical suggestions such as:
 
-5.  **Run the Full App (Phase 2 - Production):**
-    To see the custom website with the voice interface:
+“You might be dehydrated; try drinking water.”
 
-    ```bash
-    uvicorn app.main:app --reload
-    ```
+“Stomach pain may be caused by acidity or gastritis.”
+
+“If symptoms worsen, consider consulting a doctor.”
+
+(This is NOT a medical assistant — only general guidance.)
+
+🎧 3. Real-Time Speech
+
+Live listening
+
+Instant responses
+
+Conversational memory during the session
+-----
+📁 Project Structure
+/app
+ ├── agent.py       # The brain: conversations + model instructions
+ ├── tools.py       # The hands: calendar API + scheduling logic
+ └── main.py        # The nervous system: WebSocket server + audio streaming
+
+static/              # Frontend (HTML + JS)
+templates/           # Web interface for the voice chat
+requirements.txt     # Dependencies
 
 -----
+🔍 Breakdown
+1. agent.py (The Brain)
 
-## ⚠️ Important Notes
+Contains the main instructions to Gemini.
 
-  * **The Model:** We use `Gemini 2.0 Flash Experimental`. Why? Because standard models are sometimes too slow for real-time voice, or they don't support "Native Audio" (listening to raw sound files).
-  * **Safety:** The agent is instructed to be careful. For example, if you ask to delete an event, it looks for the specific ID of that event first to make sure it doesn't delete the wrong thing.
+Defines the assistant’s personality:
 
-[Image of Python WebSocket real-time communication diagram]
+Manages your calendar
 
+Gives wellness suggestions
+
+Maintains polite, conversational behavior
+
+2. tools.py (The Hands)
+
+Handles:
+
+Authentication with Google
+
+Creating, reading, updating, deleting calendar events
+
+Converting natural language → timestamps
+
+Safety checks (e.g., confirming event details)
+
+3. main.py (The Nervous System)
+
+WebSocket connection using FastAPI
+
+Handles real-time audio streaming
+
+Sends your voice to the Agent
+
+Outputs text and audio responses
 -----
 
-## 🎓 What You Are Learning
+🧳 Step-by-Step Setup
+### 1. Install Python dependencies
+   pip install -r requirements.txt
 
-By building this, you are learning:
-
-1.  **Multimodal AI:** How AI handles text and audio at the same time.
-2.  **Tool Calling:** How to make AI trigger real coding functions.
-3.  **WebSockets:** How to build real-time apps that don't need to refresh the page.
-4.  **API Integration:** How to connect Python to Google Services.
-
-This document explains how to set up and use the Google Calendar integration with your ADK Voice Assistant.
-
-## Setup Instructions
-
-### 1. Install Dependencies
-
-First, create a virtual environment:
-
-```bash
-# Create a virtual environment
-python -m venv .venv
-
-uv venv --python 3.12
-
-.venv\Scripts\activate
-
-#cmd- .venv\Scripts\activate.bat
-
-#apple- source .venv/bin/activate 
-```
-
-Activate the virtual environment:
-
-On Windows:
-```bash
-# Activate virtual environment on Windows
-.venv\Scripts\activate
-```
-
-
-python --version - check instalation
-
-On macOS/Linux:
-```bash
-# Activate virtual environment on macOS/Linux
-source .venv/bin/activate
-```
-
-Then, install all required Python packages using pip:
-
-```bash
-# Install all dependencies
-pip install -r requirements.txt
-```
 
 ### 2. Set Up Gemini API Key
 
@@ -256,6 +222,28 @@ uvicorn app.main:app --reload
 ```
 
 This will start the application server, and you can interact with your voice assistant through the provided interface.
+
+### ⚠️ Important Notes
+
+The model used is Gemini 2.0 Flash Experimental because it supports real-time audio and more advanced reasoning.
+
+Jarvis gives general wellness suggestions, not medical advice.
+
+Calendar actions always require clear date/time to avoid mistakes.
+
+The assistant intentionally double-checks event details for safety.
+
+###🎓 What You Learn From This Project
+
+How to build an AI voice assistant with Google ADK
+
+Real-time audio streaming and WebSockets
+
+Tool calling with Python functions
+
+Integrating Gemini models with Google Calendar
+
+Structuring a multi-file AI agent project
 
 ## Troubleshooting
 
